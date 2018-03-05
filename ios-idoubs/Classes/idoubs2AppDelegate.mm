@@ -24,6 +24,8 @@
 #import "MediaContent.h"
 #import "MediaSessionMgr.h"
 #import "tsk_base64.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+
 #undef TAG
 #define kTAG @"idoubs2AppDelegate///: "
 #define TAG kTAG
@@ -423,6 +425,11 @@ static dispatch_block_t sExpirationHandler = nil;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions { 
     
+    [[FBSDKApplicationDelegate sharedInstance] application:application
+                             didFinishLaunchingWithOptions:launchOptions];
+    [GIDSignIn sharedInstance].clientID = @"5256194513-e8fkoq7qphuiq0h7vul93h790vls5juj.apps.googleusercontent.com"; 
+    [GIDSignIn sharedInstance].delegate = self;
+
 	// add observers
 	[[NSNotificationCenter defaultCenter]
 	 addObserver:self selector:@selector(onNetworkEvent:) name:kNgnNetworkEventArgs_Name object:nil];
@@ -446,7 +453,6 @@ static dispatch_block_t sExpirationHandler = nil;
 	
 	// start the engine
 	[[NgnEngine sharedInstance] start];
-    
     // must be here (after AVAudioSesssionInitialize)
     if ([[[UIDevice currentDevice] systemVersion] doubleValue] >= 6.0) {
         [[NSNotificationCenter defaultCenter]
@@ -458,12 +464,14 @@ static dispatch_block_t sExpirationHandler = nil;
     }
 #endif
 	
+    LoginOViewController *loginView = [[LoginOViewController alloc] init];
 	// Set the tab bar controller as the window's root view controller and display.
+//    self.window.rootViewController = loginView;
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
 	
 	// switch to Numpad tab
-	[self.tabBarController setSelectedIndex: kTabBarIndex_Numpad];
+    [self.tabBarController setSelectedIndex: kTabBarIndex_Numpad];
 	
 	// Try to register the default identity
 //    KRProgressHUDViewController * item = [[KRProgressHUDViewController alloc] init];
@@ -508,7 +516,30 @@ static dispatch_block_t sExpirationHandler = nil;
 	
     return YES;
 }
+- (void)signIn:(GIDSignIn *)signIn didSignInForUser:(GIDGoogleUser *)user withError:(NSError *)error {
+    // Perform any operations on signed in user here.
+    NSString *userId = user.userID;                  // For client-side use only!
+    NSString *idToken = user.authentication.idToken; // Safe to send to the server
+    NSString *fullName = user.profile.name;
+    NSString *givenName = user.profile.givenName;
+    NSString *familyName = user.profile.familyName;
+    NSString *email = user.profile.email;
+}
+- (void)signIn:(GIDSignIn *)signIn didDisconnectWithUser:(GIDGoogleUser *)user withError:(NSError *)error {
+    // Perform any operations when the user disconnects from app here.
+    // ...
+}
 
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+    
+    BOOL handled = [[FBSDKApplicationDelegate sharedInstance] application:application openURL:url sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey] annotation:options[UIApplicationOpenURLOptionsAnnotationKey]];
+//    return [[GIDSignIn sharedInstance] handleURL:url
+//                               sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
+//                                      annotation:options[UIApplicationOpenURLOptionsAnnotationKey]];
+//    // Add any custom logic here.
+    return [[GIDSignIn sharedInstance] handleURL:url sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey] annotation:options[UIApplicationOpenURLOptionsAnnotationKey]];
+    //return handled || [[GIDSignIn sharedInstance] handleURL:url sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey] annotation:options[UIApplicationOpenURLOptionsAnnotationKey]];
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     /*
@@ -716,6 +747,19 @@ static dispatch_block_t sExpirationHandler = nil;
 	
     [window release];
     [super dealloc];
+}
+
+- (void)setIntWithKey:(NSString *)key Value:(int)value {
+    [[NgnEngine sharedInstance].configurationService setIntWithKey:key andValue:value];
+}
+- (void)setFloatWithKey:(NSString *)key Value:(float)value {
+    [[NgnEngine sharedInstance].configurationService setFloatWithKey:key andValue:value];
+}
+- (void)setBOOLWithKey:(NSString *)key Value:(BOOL)value {
+    [[NgnEngine sharedInstance].configurationService setBoolWithKey:key andValue:value];
+}
+- (void)setStringWithKey:(NSString *)key Value:(NSString *)value {
+    [[NgnEngine sharedInstance].configurationService setStringWithKey:key andValue:value];
 }
 
 @end

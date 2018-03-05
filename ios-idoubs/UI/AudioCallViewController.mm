@@ -77,7 +77,7 @@
 }
 
 -(void) closeView{
-    [[idoubs2AppDelegate sharedInstance].tabBarController dismissModalViewControllerAnimated:NO];
+    [[idoubs2AppDelegate sharedInstance].tabBarController dismissViewControllerAnimated:NO completion:nil];
 }
 
 -(void) updateViewAndState{

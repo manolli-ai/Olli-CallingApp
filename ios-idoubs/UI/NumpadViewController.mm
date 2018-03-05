@@ -23,6 +23,7 @@
 #import <MBProgressHUD/MBProgressHUD.h>
 #import "idoubs2AppDelegate.h"
 #import "idoubs2Constants.h"
+#import "LoginOViewController.h"
 
 #define kTAGStar		10
 #define kTAGSharp		11
@@ -56,6 +57,8 @@
 	else {
 		viewStatus.backgroundColor = [UIColor grayColor];
 		labelStatus.text = @"Not Connected";
+        // open login screen
+        
 	}
 }
 
@@ -97,9 +100,12 @@
 
 @end
 
+@interface NumpadViewController ()
+@property (nonatomic, strong) NSMutableIndexSet *optionIndices;
+@end
 
 @implementation NumpadViewController
-
+@synthesize menuBnt;
 @synthesize activityIndicator;
 @synthesize labelStatus;
 @synthesize viewStatus;
@@ -127,14 +133,17 @@
 */
 - (void)viewDidLoad {
     [super viewDidLoad];
-	
+	self.optionIndices = [NSMutableIndexSet indexSetWithIndex:1];
 	NgnEngine* ngnEngine = [[NgnEngine sharedInstance] retain];
 	mSipService = [[ngnEngine getSipService] retain];
 	mConfigurationService = [[ngnEngine getConfigurationService] retain];
 	[ngnEngine release];
 	
     [self updateStatus:nil];
-	
+    
+//    self.menuBnt = [[MMButonController alloc] init];
+    self.menuBnt.parentView = self;
+//    [self.menuBnt initButton];
 	[[NSNotificationCenter defaultCenter]
 	 addObserver:self selector:@selector(onRegistrationEvent:) name:kNgnRegistrationEventArgs_Name object:nil];
 }
@@ -245,6 +254,5 @@
 	
     [super dealloc];
 }
-
 
 @end

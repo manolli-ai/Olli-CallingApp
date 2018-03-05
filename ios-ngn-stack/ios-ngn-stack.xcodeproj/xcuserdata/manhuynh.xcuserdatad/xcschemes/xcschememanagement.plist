@@ -62,7 +62,7 @@
 		<key>tinyIPSec.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>20</integer>
+			<integer>21</integer>
 		</dict>
 		<key>tinyMEDIA.xcscheme</key>
 		<dict>
@@ -72,12 +72,12 @@
 		<key>tinyMSRP.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>21</integer>
+			<integer>20</integer>
 		</dict>
 		<key>tinyNET.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>16</integer>
+			<integer>18</integer>
 		</dict>
 		<key>tinyRTP.xcscheme</key>
 		<dict>
@@ -87,12 +87,12 @@
 		<key>tinySAK.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>17</integer>
+			<integer>16</integer>
 		</dict>
 		<key>tinySDP.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>18</integer>
+			<integer>17</integer>
 		</dict>
 		<key>tinySIGCOMP.xcscheme</key>
 		<dict>

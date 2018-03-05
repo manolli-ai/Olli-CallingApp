@@ -19,8 +19,9 @@
  *
  */
 #import <UIKit/UIKit.h>
-
 #import "iOSNgnStack.h"
+#import "ProfilePageViewController.h"
+#import "MMButonController.h"
 
 @interface NumpadViewController : UIViewController {
 	UIActivityIndicatorView* activityIndicator;
@@ -32,8 +33,9 @@
     UIButton *loginBnt;
 	NgnBaseService<INgnSipService>* mSipService;
 	NgnBaseService<INgnConfigurationService>* mConfigurationService;
+    MMButonController *menuBnt;
 }
-
+@property(retain, nonatomic) IBOutlet MMButonController *menuBnt;
 @property (retain, nonatomic) IBOutlet UIActivityIndicatorView* activityIndicator;
 @property (retain, nonatomic) IBOutlet UILabel *labelStatus;
 @property (retain, nonatomic) IBOutlet UIView *viewStatus;

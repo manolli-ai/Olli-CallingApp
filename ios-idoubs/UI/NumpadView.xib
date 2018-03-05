@@ -28,6 +28,7 @@
                 <outlet property="buttonMakeAudioCall" destination="37" id="61"/>
                 <outlet property="labelNumber" destination="6" id="43"/>
                 <outlet property="labelStatus" destination="35" id="44"/>
+                <outlet property="menuBnt" destination="4CK-wx-Sn1" id="ebd-gr-oPA"/>
                 <outlet property="view" destination="1" id="3"/>
                 <outlet property="viewStatus" destination="7" id="45"/>
             </connections>
@@ -353,12 +354,21 @@
                         <action selector="Login:" destination="-1" eventType="touchUpInside" id="p4f-oz-76q"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="4CK-wx-Sn1" customClass="MMButonController">
+                    <rect key="frame" x="15" y="16" width="19" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="burger.png">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-538" y="26"/>
         </view>
     </objects>
     <resources>
+        <image name="burger.png" width="19" height="17"/>
         <image name="keypad_0.png" width="106" height="68"/>
         <image name="keypad_1.png" width="106" height="68"/>
         <image name="keypad_2.png" width="106" height="68"/>

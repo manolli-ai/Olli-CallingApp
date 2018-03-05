@@ -30,7 +30,7 @@
 -(BOOL) stopRingTone;
 -(BOOL) playRingBackTone;
 -(BOOL) stopRingBackTone;
--(BOOL) playDtmf:(int)digit;
+-(BOOL) playDtmf:(NSInteger)digit;
 
 #if TARGET_OS_IPHONE
 -(BOOL) vibrate;

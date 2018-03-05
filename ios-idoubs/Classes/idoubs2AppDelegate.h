@@ -24,10 +24,12 @@
 #import "MessagesViewController.h"
 #import "ChatViewController.h"
 #import "ContactsViewController.h"
-
+#import "LoginOViewController.h"
 #import "iOSNgnStack.h"
+#import "GoogleSignIn/GoogleSignIn.h"
 
-@interface idoubs2AppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate> {
+
+@interface idoubs2AppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate,GIDSignInDelegate> {
     UIWindow *window;
     UITabBarController *tabBarController;
 	ContactsViewController *contactsViewController;
@@ -53,6 +55,10 @@
 
 -(void) selectTabContacts;
 -(void) selectTabMessages;
+-(void) setIntWithKey:(NSString *)key Value:(int)value;
+-(void) setFloatWithKey:(NSString *)key Value:(float)value;
+-(void) setBOOLWithKey:(NSString *)key Value:(BOOL)value;
+-(void) setStringWithKey:(NSString *)key Value:(NSString *)value;
 +(idoubs2AppDelegate*) sharedInstance;
 
 @end

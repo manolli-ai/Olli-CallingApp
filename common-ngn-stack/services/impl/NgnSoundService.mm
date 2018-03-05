@@ -230,11 +230,11 @@
 	return YES;
 }
 
--(BOOL) playDtmf:(int)digit{
+-(BOOL) playDtmf:(NSInteger)digit{
 	NSString* code = nil;
 	BOOL ok = NO;
 	switch(digit){
-		case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9: code = [NSString stringWithFormat:@"%i", digit]; break; 
+        case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9: code = [NSString stringWithFormat:@"%li", (long)digit]; break; 
 		case 10: code = @"pound"; break;
 		case 11: code = @"star"; break;
 		default: code = @"0";
